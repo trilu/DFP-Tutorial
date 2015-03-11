@@ -1,0 +1,82 @@
+<!--
+
+Upload the content of this file in the Orders -> Creatives -> Creative Templates -> Add Creative Template. See more
+
+http://www.chriswgerber.com/creating-clickable-wallpaper-google-doubleclick-for-publishers-dfp/
+
+and thanks to https://css-tricks.com/perfect-full-page-background-image/ for cross browser compatibility
+
+!!!ATENTION: this template assumes you have jquery loaded on your page!!!
+
+-->
+
+<script>
+
+//this code might be executed in an iFrame so make sure we 
+//interact with the main jQuery
+if(!window.$)
+{
+	$ = parent.window.jQuery;
+}
+
+//make sure to run the following code only when the parent DOM has fully loaded as otherwise the ad might not be shown at all times
+$(parent.document).ready(function(){
+
+	//create a new div for the skin
+	$(
+	
+		//this part creates the div whose background will be the entire image
+		'<div id="skin_%ecid!_advertisement"></div>'	
+	)
+
+	//set the css style for the skin (the newly created div)
+	.css({
+
+		/* Set up proportionate scaling */
+		'width': '100%',
+		'height': '100%',
+	
+		/* Set up positioning */
+		'position': 'fixed',
+		'top': '0',
+		'left': '0',
+		'z-index': '-1',
+			
+		/* Set up the background image and behavior */
+		'background': "url('%%VIEW_URL_UNESC%%[%BackgroundImage%]') no-repeat center center fixed",
+		'-webkit-background-size': 'cover',
+		'-moz-background-size': 'cover',
+		'-o-background-size': 'cover',
+		'background-size': 'cover',
+		'filter': "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='%%VIEW_URL_UNESC%%[%BackgroundImage%]', sizingMethod='scale')",
+		'-ms-filter': "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='%%VIEW_URL_UNESC%%[%BackgroundImage%]', sizingMethod='scale')"
+
+	})
+
+	//add the click logic to 
+	.click(function(){
+	
+		//open the URL in the specified target window
+		window.open("%%CLICK_URL_UNESC%%[%ClickthroughURL%]", "[%TargetWindow%]");
+	
+	})
+
+	//and make sure it is inserted as the first div in the DOM
+	//it's best to first create the element, set all it's properties and only in the end insert it as it avoids any flickers
+	.prependTo("body");
+	
+
+	//check if we have a 3rd party impression tracking pixel
+	var trackingPixel="[%TrackingPixel%]";
+	if ( trackingPixel.indexOf("http")==0 ){
+	
+		//create the tracking pixel
+		$('<img src="[%TrackingPixel%]" width="0" height="0">')
+		
+		//insert it at the begining of the DOM so the browser will request it (and thus track the impression at the 3rd party)
+		.prependTo("body");
+	}
+ 
+});
+
+</script>
