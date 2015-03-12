@@ -10,6 +10,12 @@ and thanks to https://css-tricks.com/perfect-full-page-background-image/ for cro
 
 -->
 
+
+<!-- use this trick to preload the image so it can be used as a background image when the time is right (see bellow: $(document).ready() ) -->
+<img id="skin_%ecid!_advertisement_preload" src="%%VIEW_URL_UNESC%%[%BackgroundImage%]" style="left:-9999px; top:-9999px;" />
+
+
+<!-- the really interesting part of the script -->
 <script>
 
 //this code might be executed in an iFrame so make sure we 
@@ -71,7 +77,7 @@ $(parent.document).ready(function(){
 	if ( trackingPixel.indexOf("http")==0 ){
 	
 		//create the tracking pixel
-		$('<img src="[%TrackingPixel%]" width="0" height="0">')
+		$('<img src="[%TrackingPixel%]" width="0" height="0" />')
 		
 		//insert it at the begining of the DOM so the browser will request it (and thus track the impression at the 3rd party)
 		.prependTo("body");
