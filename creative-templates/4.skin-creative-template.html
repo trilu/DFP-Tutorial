@@ -77,10 +77,10 @@ $(parent.document).ready(function(){
 	if ( trackingPixel.indexOf("http")==0 ){
 	
 		//create the tracking pixel
-		$('<img src="[%TrackingPixel%]" width="0" height="0" />')
+		$('<img src="[%TrackingPixel%]" width="0" height="0" style="left:-9999px; top:-9999px;" />')
 		
-		//insert it at the begining of the DOM so the browser will request it (and thus track the impression at the 3rd party)
-		.prependTo("body");
+		//insert it at the end of the DOM so the browser will request it (and thus track the impression at the 3rd party)
+		.appendTo("body");
 	}
  
 });
