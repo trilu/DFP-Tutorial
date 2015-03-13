@@ -1,0 +1,163 @@
+<!DOCTYPE HTML> 
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8"> 
+<title>Wallpaper / Skin Ad Example using Double Click for Publishers (DFP)</title> 
+
+<!-- Use the latest jQUERY from GOOGLE's CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
+<!-- This piece of code loads the DFP code. Pretty standard -->
+<script type='text/javascript'>
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+
+<script type='text/javascript'>
+
+//if you look at the definition above, this is actually an array
+//and is used as a queue where commands are storred until the JS code above 
+//is loaded asynchronously
+//see https://developers.google.com/doubleclick-gpt/reference#googletag.CommandArray
+googletag.cmd.push(function() {
+
+		//simply define the Ad Unit
+		//https://developers.google.com/doubleclick-gpt/reference#googletag.defineSlot
+		googletag.defineSlot('/3555411/trilulilu-dev-wallpaper-skin', [1, 1], 'div-gpt-ad-1426065454771-0').addService(googletag.pubads());
+		
+		//define the "Out of Page Slot", even though it's the same ad unit as the one above
+		//https://developers.google.com/doubleclick-gpt/reference#googletag.defineOutOfPageSlot
+		googletag.defineOutOfPageSlot('/3555411/trilulilu-dev-wallpaper-skin', 'div-gpt-ad-1426065454771-0-oop').addService(googletag.pubads());
+		
+		
+		//NEW: simply define the Ad Units, but also WITH THE COMPANION service (so they support companion)
+		//https://developers.google.com/doubleclick-gpt/reference#googletag.defineSlot
+		googletag.defineSlot('/3555411/trilulilu-dev-basic-ad', [970, 90], 'div-gpt-ad-1425636715882-0')
+			.addService(googletag.companionAds()) //this is the NEW part. we simply say that this ad unit should support companion ads
+			.addService(googletag.pubads());
+			
+		googletag.defineSlot('/3555411/trilulilu-dev-bellow-video', [728, 90], 'div-gpt-ad-1425811483197-0')
+			.addService(googletag.companionAds()) //this is the NEW part. we simply say that this ad unit should support companion ads
+			.addService(googletag.pubads());
+			
+		googletag.defineSlot('/3555411/trilulilu-dev-right-rectangle', [300, 250], 'div-gpt-ad-1425811483197-1')
+			.addService(googletag.companionAds()) //this is the NEW part. we simply say that this ad unit should support companion ads
+			.addService(googletag.pubads());
+		
+
+		//enable all ads to be received together (it is faster because we don't have multiple HTTP requests to the Ad Server and usefull for enforcing companionship -> all banners to show the content regarding the same brand)
+		//https://developers.google.com/doubleclick-gpt/reference#googletag.PubAdsService_enableSingleRequest
+		googletag.pubads().enableSingleRequest();
+
+		//NEW: for Companion Ads, it's important that we can refresh ad units that are not yet filled
+		//https://developers.google.com/doubleclick-gpt/reference#googletag.CompanionAdsService_setRefreshUnfilledSlots
+		googletag.companionAds().setRefreshUnfilledSlots(true);
+
+		//enables DFP for previously defined Ad Slots
+		//https://developers.google.com/doubleclick-gpt/reference#googletag.enableServices
+		googletag.enableServices();
+
+});
+</script>
+
+</head>
+
+<body>
+
+ <!-- The Ad unit placeholder -->
+ 
+
+	<!-- The 1x1 pixel -->
+	<div id='div-gpt-ad-1426065454771-0' style='width:1px; height:1px;'>
+	
+		<script type='text/javascript'>
+	
+			//instruct DFP to render the 1x1 part of this ad unit
+			//https://developers.google.com/doubleclick-gpt/reference#googletag.display
+			googletag.cmd.push(function() { googletag.display('div-gpt-ad-1426065454771-0'); });
+	
+		</script>
+	</div>
+	
+	<!-- The out-of-page (interstitial) part -->
+	<div id='div-gpt-ad-1426065454771-0-oop'>
+	
+		<script type='text/javascript'>
+	
+			//instruct DFP to render the out-of-page part for this ad unit
+			//https://developers.google.com/doubleclick-gpt/reference#googletag.display
+			googletag.cmd.push(function() { googletag.display('div-gpt-ad-1426065454771-0-oop'); });
+	
+		</script>
+	</div>
+
+ 
+ <!-- Trilulilu Dev Basic Ad (Large Leaderboard) -->
+ <div id='div-gpt-ad-1425636715882-0' style='width:970px; height:90px;border:1px solid;'>
+	 
+ 	<script type='text/javascript'>
+ 		
+		//again the command is put in the array queue
+		googletag.cmd.push(function() { 
+			
+			//instruct DFP to render this ad
+			//https://developers.google.com/doubleclick-gpt/reference#googletag.display
+			googletag.display('div-gpt-ad-1425636715882-0'); 
+		
+		});
+ 	
+	</script>
+ 
+ </div>
+
+
+
+ <!-- The actual content -->
+ <div id="content">
+  Example of Ad exclusion. When the skin is shown, the billboard should be hidden. <a href="http://www.google.ro">This is a link that should work</a>
+ </div>
+ 
+ 
+ <!-- Trilulilu Dev Bellow Video -->
+ <div id='div-gpt-ad-1425811483197-0' style='width:728px; height:90px; border:1px solid;'>
+ 	
+	<script type='text/javascript'>
+ 	
+		googletag.cmd.push(function() { 
+			
+			//instruct DFP to render this ad
+			//https://developers.google.com/doubleclick-gpt/reference#googletag.display
+			googletag.display('div-gpt-ad-1425811483197-0'); 
+		
+		});
+ 	   
+	</script>
+ </div>
+ 
+ <!-- Trilulilu Dev Right Rectangle -->
+ <div id='div-gpt-ad-1425811483197-1' style='width:300px; height:250px; border:1px solid;'>
+ 
+ 	<script type='text/javascript'>
+ 		googletag.cmd.push(function() { 
+			
+			googletag.display('div-gpt-ad-1425811483197-1'); 
+		
+		});
+ 	</script>
+		
+ </div>
+ 
+</body>
+</html>
