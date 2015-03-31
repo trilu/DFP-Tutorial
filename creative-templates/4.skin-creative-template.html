@@ -55,8 +55,10 @@ $(parent.document).ready(function(){
 		'-o-background-size': 'cover',
 		'background-size': 'cover',
 		'filter': "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='%%VIEW_URL_UNESC%%[%BackgroundImage%]', sizingMethod='scale')",
-		'-ms-filter': "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='%%VIEW_URL_UNESC%%[%BackgroundImage%]', sizingMethod='scale')"
-
+		'-ms-filter': "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='%%VIEW_URL_UNESC%%[%BackgroundImage%]', sizingMethod='scale')",
+		
+		/* Since the user can click on the background, also change the cursor to tell him that*/
+		'cursor': 'pointer'
 	})
 
 	//add the click logic to 
