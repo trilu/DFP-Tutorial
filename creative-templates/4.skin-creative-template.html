@@ -46,7 +46,7 @@ $(parent.document).ready(function(){
 		'position': 'fixed',
 		'top': '0',
 		'left': '0',
-		'z-index': '-1',
+		'z-index': '[%ZIndex%]',
 			
 		/* Set up the background image and behavior */
 		'background': "url('%%VIEW_URL_UNESC%%[%BackgroundImage%]') no-repeat center center fixed",
@@ -71,7 +71,7 @@ $(parent.document).ready(function(){
 
 	//and make sure it is inserted as the first div in the DOM
 	//it's best to first create the element, set all it's properties and only in the end insert it as it avoids any flickers
-	.prependTo("body");
+	.prependTo("[%Parent%]");
 	
 
 	//check if we have a 3rd party impression tracking pixel
