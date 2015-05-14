@@ -1,0 +1,38 @@
+<script>
+
+//Based on https://support.google.com/dfp_sb/answer/2557031
+//this is placed here to pass validation from DFP %%CLICK_URL_UNESC%%
+
+
+var encoded_code = "[%Encoded3rdPartyCode%]";
+
+
+try{
+
+	var parent_div = null;
+
+	//this code might be executed in an iFrame so make sure we 
+	//interact with the main jQuery
+
+	if(top!=self)
+	{
+		$ = parent.window.jQuery;
+
+		parent_div = window.frameElement ? window.frameElement.parentNode : null;
+	}
+
+	//TODO: if we are not in an iframe we should get somehow the parent div reference
+
+
+	/* Use appropriate code to have the creative escape the iframe and show the ad. Most likely the code will need to use DOM functions and reference the top window. */	
+
+	$(parent_div).html(decodeURIComponent(encoded_code.replace(/\+/g,  " ")));
+
+}catch(e){
+	
+	/* The creative cannot escape the iframe. Show an appropriate alternative. The alternative will remain inside of the iframe. */
+	console.log(e);
+
+}
+
+</script>
