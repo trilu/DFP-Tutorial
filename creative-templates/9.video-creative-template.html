@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!-- This creative template serves videos in an ad unit using the open source video.js player -->
+<html>
+<head>
+
+ <link href="//vjs.zencdn.net/4.12/video-js.css" rel="stylesheet" type="text/css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <!-- video.js must be in the <head> for older IEs to work. -->
+  <script src="//vjs.zencdn.net/4.12/video.js"></script>
+
+  <!-- hide the full screen in the default theme -->
+  <style type="text/css">
+
+  	.vjs-fullscreen-control{
+
+  		display:none;
+  	}
+
+	.vjs-control-bar{
+
+		padding-right:10px;
+	}
+
+  </style>
+
+</head>
+<body>
+
+
+  <!-- the actual player -->
+  <video id="ad_player" class="video-js vjs-default-skin" controls autoplay preload="auto" width="%%WIDTH%%" height="%%HEIGHT%%" data-setup='{}'>
+    <source src="[%VideoFilemp4URL%]" type='video/mp4' />
+  </video>
+
+
+
+  <script>
+  	
+  	//initialize function after player is ready
+	videojs("ad_player").ready(function(){
+  			
+  			var player = this;
+  			var video = $("#ad_player video"); //this works if the html5 mode is used for rendering
+
+  			//mute the ad by default
+  			player.muted(true);
+
+                      //check if we have a 3rd party impression tracking pixel
+                     var trackingPixel="[%TrackingPixel%]";
+	             if ( trackingPixel.indexOf("http")==0 ){
+	
+		              //create the tracking pixel
+	 	              $('<img src="[%TrackingPixel%]" width="0" height="0" style="left:-9999px; top:-9999px;" />')
+		
+		              //insert it at the end of the DOM so the browser will request it (and thus track the impression at the 3rd party)
+		             .appendTo("body");
+
+                       }
+
+  			player.on("click", function(event){
+
+  				// Support IE6-8
+	                       var target = event.target || event.srcElement;
+
+  				//check if the user clicked on the video, not on the control bars
+  				if(video.is(target))
+  				{
+        	    	//open the URL in the specified target window
+					window.open("%%CLICK_URL_UNESC%%[%ClickthroughURL%]", "[%TargetWindow%]");
+				}
+    		});
+
+	});
+
+  </script>
+
+</body>
+</html>
